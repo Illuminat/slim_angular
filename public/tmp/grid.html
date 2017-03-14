@@ -14,8 +14,8 @@
                     {{item.title}}
                 </div>
                 <div class="actions">
-                    <a href="/edit/{{item.id}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
-                    <a href="/delete/{{item.id}}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></a>
+                    <a ng-click="updateTask(item.id)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a ng-click="deleteTask(item.id)" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-remove"></i></a>
                 </div>
             </div>
         </div>

@@ -37,18 +37,6 @@ $app->get('/task/{id}', function (Request $request, Response $response, $args) {
 });
 
 
-// Search for todo with given search teram in their name
-$app->get('/tasks/search/{query}', function (Request $request, Response $response, $args) {
-    $sth = $this->db->prepare("SELECT * FROM tasks WHERE UPPER(task) LIKE :query ORDER BY task");
-    $query = "%".$args['query']."%";
-    $sth->bindParam("query", $query);
-    $sth->execute();
-    $todos = $sth->fetchAll();
-
-    return $this->response->withJson($todos);
-});
-
-// Add a new todo
 $app->post('/task/new', function (Request $request, Response $response) {
     try {
         $input = $request->getParsedBody();
@@ -64,8 +52,6 @@ $app->post('/task/new', function (Request $request, Response $response) {
     return $this->response;
 });
 
-
-// DELETE a todo with given id
 $app->delete('/task/{id}', function (Request $request, Response $response, $args) {
     $sth = $this->db->prepare("DELETE FROM tasks WHERE id=:id");
     $sth->bindParam("id", $args['id'], PDO::PARAM_INT);
@@ -73,7 +59,6 @@ $app->delete('/task/{id}', function (Request $request, Response $response, $args
     return $this->response;
 });
 
-// Update todo with given id
 $app->put('/task/[{id}]', function (Request $request, Response $response, $args) {
     $input = $request->getParsedBody();
     $sql = "UPDATE tasks SET title=:title, type=:type WHERE id=:id";

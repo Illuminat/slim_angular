@@ -5,18 +5,12 @@ config(['$routeProvider', function($routeProvider){
         controller: 'appController',
         templateUrl: 'public/tmp/main.html'
     }).
-    when('/edit', {
-        controller: 'appController',
-        templateUrl: 'public/tmp/main.html'
-    }).
     otherwise({
         redirectTo: '/main'
     });
 }]).
 controller('appController', function($scope, $uibModal){
     $scope.data = {};
-    // function to get records from the database
-
     $scope.propertyName = 'created';
     $scope.reverse = true;
 
@@ -46,6 +40,7 @@ controller('appController', function($scope, $uibModal){
             .catch(function (error) {
             });
     };
+
     $scope.updateTask = function(id){
         $scope.task = {};
         axios.get('api/task/'+id)
@@ -68,6 +63,7 @@ controller('appController', function($scope, $uibModal){
             .catch(function (error) {
             });
     };
+
     $scope.deleteTask = function(id){
         axios.delete('api/task/'+id)
             .then(function (response) {
